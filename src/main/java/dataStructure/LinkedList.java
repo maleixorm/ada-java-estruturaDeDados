@@ -125,7 +125,33 @@ public class LinkedList {
         return temp;
     }
 
-    
+    public boolean insert(int index, String data) {
+        if (index < 0 || index >= length) return false;
+        if (index == 0) {
+            preppend(data);
+            return true;
+        }
+        if (index == length) {
+            append(data);
+            return true;
+        }
+
+        Node newNode = new Node(data);
+        Node temp = get(index - 1);
+        newNode.next = temp.next;
+        temp.next = newNode;
+        length++;
+        return true;
+    }
+
+    public boolean set(int index, String data) {
+        Node temp = get(index);
+        if (temp != null) {
+            temp.data = data;
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -139,10 +165,13 @@ public class LinkedList {
         list.getTail();
         list.getLength();
         System.out.println("GET: " + list.get(2).data);
+        list.insert(3, "elemento 2.5");
         list.print();
         System.out.println(list.removeLast().data);
         list.print();
         System.out.println(list.removeFirst().data);
+        list.print();
+        list.set(1, "elemento 1.5");
         list.print();
     }
 
